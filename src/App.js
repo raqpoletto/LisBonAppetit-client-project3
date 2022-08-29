@@ -7,6 +7,7 @@ import IsPrivate from "./components/IsPrivate";
 import IsPublic from "./components/IsPublic";
 import ProfilePage from "./pages/ProfilePage";
 import RestaurantsListPage from "./pages/RestaurantsListPage";
+import CreateRestaurantPage from "./pages/CreateRestaurant";
 
 function App() {
   return (
@@ -39,11 +40,19 @@ function App() {
           }
         />
         <Route
-          path="/restaurantslist"
+          path="/restaurants"
           element={
-            <IsPublic>
+            <IsPrivate>
               <RestaurantsListPage />
-            </IsPublic>
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/restaurants/create"
+          element={
+            <IsPrivate>
+              <CreateRestaurantPage />
+            </IsPrivate>
           }
         />
       </Routes>

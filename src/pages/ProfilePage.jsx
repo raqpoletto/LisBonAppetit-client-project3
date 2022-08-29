@@ -28,7 +28,7 @@ function ProfilePage() {
     try {
       const getToken = localStorage.getItem("authToken");
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/api/profile/${user._id}`,
+        `${process.env.REACT_APP_API_URL}/api/profile/${user._id}`,
         {
           headers: {
             Authorization: `Bearer ${getToken}`,

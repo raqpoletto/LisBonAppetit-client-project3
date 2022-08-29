@@ -7,16 +7,16 @@ function Navbar() {
 
   return (
     <nav>
-      <Link to="/">
+      {/* <Link to="/">
         <button>Home</button>
-      </Link>
+      </Link> */}
       {loggedIn && (
         <>
           <Link to="/">
             <button>Home</button>
           </Link>
-          <span>Hello {user}</span>
-          <button onClick={logout}>Logout</button>
+          <span>Hello {user.email}</span>
+          <button onClick={() => logout()}>Logout</button>
         </>
       )}
 

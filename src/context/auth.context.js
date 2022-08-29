@@ -1,8 +1,8 @@
-import { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 
 //creates the context
-const AuthContext = createContext();
+const AuthContext = React.createContext();
 
 function AuthProviderWrapper(props) {
   const [loading, setLoading] = useState(true);
