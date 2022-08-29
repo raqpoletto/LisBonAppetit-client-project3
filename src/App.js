@@ -7,7 +7,8 @@ import IsPrivate from "./components/IsPrivate";
 import IsPublic from "./components/IsPublic";
 import ProfilePage from "./pages/ProfilePage";
 import RestaurantsListPage from "./pages/RestaurantsListPage";
-import CreateRestaurantPage from "./pages/CreateRestaurant";
+import CreateRestaurant from "./components/CreateRestaurant";
+import EditRestaurantPage from "./pages/EditRestaurantPage";
 
 function App() {
   return (
@@ -51,7 +52,15 @@ function App() {
           path="/restaurants/create"
           element={
             <IsPrivate>
-              <CreateRestaurantPage />
+              <CreateRestaurant />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/restaurant/edit/:id"
+          element={
+            <IsPrivate>
+              <EditRestaurantPage />
             </IsPrivate>
           }
         />

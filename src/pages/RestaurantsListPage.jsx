@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import CreateRestaurant from "../components/CreateRestaurant";
 
 function RestaurantsListPage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -8,7 +9,7 @@ function RestaurantsListPage() {
   const [displayRestaurants, setDisplayRestaurants] = useState([]); */
   const getToken = localStorage.getItem("authToken");
 
-  const getAllRestaurants = async () => {
+  const getRestaurantList = async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/restaurant`,
@@ -41,11 +42,13 @@ function RestaurantsListPage() {
   }; */
 
   useEffect(() => {
-    getAllRestaurants();
+    getRestaurantList();
   }, []);
 
   return (
     <div>
+      <CreateRestaurant getRestaurantList={getRestaurantList} />
+
       <h2>Restaurant List</h2>
 
       {restaurants &&

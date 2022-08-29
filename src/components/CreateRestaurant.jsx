@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 
-function CreateRestaurantPage() {
+function CreateRestaurantPage({ getRestaurantList }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [averagePrice, setAveragePrice] = useState("");
   const [contact, setContact] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
 
@@ -17,23 +18,17 @@ function CreateRestaurantPage() {
   const handleAddress = (e) => setAddress(e.target.value);
   const handleAveragePrice = (e) => setAveragePrice(e.target.value);
   const handleContact = (e) => setContact(e.target.value);
-  const handleImageUrl = (e) => setImageUrl(e.target.value);
 
   const handleFileUpload = (e) => {
     setLoading(true);
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
-    //console.log(user);
-    // imageUrl => this name has to be the same as in the model since we pass
-    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+
     uploadData.append("imageUrl", e.target.files[0]);
 
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData)
       .then((response) => {
-        // console.log("response is: ", response);
-        // response carries "fileUrl" which we can use to update the state
         console.log(response.data.fileUrl);
         setImageUrl(response.data.fileUrl);
         setLoading(false);
@@ -60,7 +55,7 @@ function CreateRestaurantPage() {
     const storedToken = localStorage.getItem("authToken");
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/restaurants`, newRestaurant, {
+      .post(`${process.env.REACT_APP_API_URL}/api/restaurant`, newRestaurant, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },
@@ -84,7 +79,7 @@ function CreateRestaurantPage() {
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
-          Store:
+          Name:
           <input type="text" name="name" value={name} onChange={handleName} />
         </label>
 
