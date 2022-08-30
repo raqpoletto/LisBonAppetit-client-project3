@@ -5,14 +5,14 @@ import { AuthContext } from "../context/auth.context";
 
 function RestaurantDetailsPage() {
   const [restaurant, setRestaurant] = useState(null);
-  const { id } = useParams();
+  const { restaurantId } = useParams();
   const { user } = useContext(AuthContext);
 
   const getRestaurant = async () => {
     try {
       const getToken = localStorage.getItem("authToken");
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/restaurants/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/restaurant/${restaurantId}`,
         {
           headers: {
             Authorization: `Bearer ${getToken}`,
@@ -21,7 +21,6 @@ function RestaurantDetailsPage() {
       );
       //console.log(response.data)
       setRestaurant(response.data);
-      setComments(response.data.comments.reverse());
     } catch (error) {
       console.log(error);
     }
@@ -31,8 +30,9 @@ function RestaurantDetailsPage() {
     getRestaurant();
   }, []);
 
-  eturn(
-    <div className="ProjectDetails">
+  return (
+    <div>
+      <h1>teste</h1>
       {restaurant && (
         <>
           <img src={restaurant.imageUrl} />
@@ -44,12 +44,12 @@ function RestaurantDetailsPage() {
         </>
       )}
 
-      <Link to={`/restaurant/edit/${id}`}>
+      <Link to={`/restaurant/edit/${restaurantId}`}>
         <button>Edit Restaurant</button>
       </Link>
 
       <Link to="/restaurants">
-        <Button>See all Restaurants</Button>
+        <button>See all Restaurants</button>
       </Link>
     </div>
   );

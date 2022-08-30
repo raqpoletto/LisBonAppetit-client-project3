@@ -18,7 +18,7 @@ function EditRestaurantPage() {
     try {
       const getToken = localStorage.getItem("authToken");
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/restaurants/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/restaurant/${id}`,
         { headers: { Authorization: `Bearer ${getToken}` } }
       );
 
@@ -37,7 +37,7 @@ function EditRestaurantPage() {
     try {
       const getToken = localStorage.getItem("authToken");
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/restaurants/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/restaurant/${id}`,
         { headers: { Authorization: `Bearer ${getToken}` } }
       );
       navigate("/restaurant");
@@ -154,7 +154,12 @@ function EditRestaurantPage() {
           />
         </label>
 
-        <button type="submit">Edit Restaurant</button>
+        <button
+          className="btn btn-outline-primary me-2"
+          onClick={EditRestaurantPage}
+        >
+          Edit Restaurant
+        </button>
 
         <button onClick={deleteRestaurant}>Delete Restaurant</button>
       </form>

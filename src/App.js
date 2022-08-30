@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import RestaurantsListPage from "./pages/RestaurantsListPage";
 import CreateRestaurant from "./components/CreateRestaurant";
 import EditRestaurantPage from "./pages/EditRestaurantPage";
+import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
 
 function App() {
   return (
@@ -57,7 +58,15 @@ function App() {
           }
         />
         <Route
-          path="/restaurant/edit/:id"
+          path="/restaurants/:restaurantId"
+          element={
+            <IsPrivate>
+              <RestaurantDetailsPage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/restaurant/edit/:restaurantId"
           element={
             <IsPrivate>
               <EditRestaurantPage />
