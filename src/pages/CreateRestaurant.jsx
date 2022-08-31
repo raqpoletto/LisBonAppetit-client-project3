@@ -53,7 +53,6 @@ function CreateRestaurantPage({ getRestaurantList }) {
       user: user._id,
     };
     const storedToken = localStorage.getItem("authToken");
-
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/restaurant`, newRestaurant, {
         headers: {

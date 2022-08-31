@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
@@ -10,16 +10,47 @@ function EditRestaurantPage() {
   const [averagePrice, setAveragePrice] = useState("");
   const [contact, setContact] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const { id } = useParams();
+  const { user } = useContext(AuthContext);
+  const { restaurantId } = useParams();
   const navigate = useNavigate();
+
+  const handleName = (e) => setName(e.target.value);
+  const handleDescription = (e) => setDescription(e.target.value);
+  const handleAddress = (e) => setAddress(e.target.value);
+  const handleAveragePrice = (e) => setAveragePrice(e.target.value);
+  const handleContact = (e) => setContact(e.target.value);
+
+  const handleFileUpload = (e) => {
+    setLoading(true);
+
+    const uploadData = new FormData();
+
+    uploadData.append("imageUrl", e.target.files[0]);
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        console.log(response.data.fileUrl);
+        setImageUrl(response.data.fileUrl);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log("Error while uploading the file: ", err);
+      });
+  };
 
   const getRestaurantList = async () => {
     try {
-      const getToken = localStorage.getItem("authToken");
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/restaurant/${id}`,
-        { headers: { Authorization: `Bearer ${getToken}` } }
+      const storedToken = localStorage.getItem("authToken");
+      let response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/restaurant/${restaurantId}`,
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       );
 
       setName(response.data.name);
@@ -33,65 +64,54 @@ function EditRestaurantPage() {
     }
   };
 
-  const deleteRestaurant = async () => {
-    try {
-      const getToken = localStorage.getItem("authToken");
-      const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/restaurant/${id}`,
-        { headers: { Authorization: `Bearer ${getToken}` } }
-      );
-      navigate("/restaurant");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     getRestaurantList();
   }, []);
 
-  const handleName = (e) => setName(e.target.value);
-  const handleDescription = (e) => setDescription(e.target.value);
-  const handleAddress = (e) => setAddress(e.target.value);
-  const handleAveragePrice = (e) => setAveragePrice(e.target.value);
-  const handleContact = (e) => setContact(e.target.value);
-  const handleImageUrl = (e) => setImageUrl(e.target.value);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (loading) alert("Image still loading...");
 
-  const handleSubmit = async (event) => {
-    try {
-      event.preventDefault();
+    const editRestaurant = {
+      name,
+      description,
+      address,
+      averagePrice,
+      contact,
+      imageUrl,
+      user: user._id,
+    };
 
-      const editRestaurant = {
-        name: name,
-        description: description,
-        address: address,
-        averagePrice: averagePrice,
-        contact: contact,
-        imageUrl: imageUrl,
-      };
+    const storedToken = localStorage.getItem("authToken");
+    axios.put(
+      `${process.env.REACT_APP_API_URL}/api/restaurant/${restaurantId}`,
+      editRestaurant,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
 
-      const getToken = localStorage.getItem("authToken");
-      await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/restaurants/${id}`,
-        editRestaurant,
-        {
-          headers: {
-            Authorization: `Bearer ${getToken}`,
-          },
-        }
-      );
-
-      setName("");
-      setDescription("");
-      setAddress("");
-      setContact("");
-      setAveragePrice("");
-      setImageUrl("");
-
-      navigate(`/restaurants/${id}`);
-    } catch (error) {
-      console.log(error);
-    }
+    setName("");
+    setDescription("");
+    setAddress("");
+    setContact("");
+    setAveragePrice("");
+    setImageUrl("");
+    navigate(`/restaurants/${restaurantId}`);
+  };
+  const deleteRestaurant = () => {
+    const storedToken = localStorage.getItem("authToken");
+    axios
+      .delete(
+        `${process.env.REACT_APP_API_URL}/api/restaurant/${restaurantId}`,
+        { headers: { Authorization: `Bearer ${storedToken}` } }
+      )
+      .then(() => {
+        navigate("/restaurants");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -150,7 +170,7 @@ function EditRestaurantPage() {
           <input
             type="file"
             accept=".jpg, .png, .jpeg"
-            onChange={(e) => handleImageUrl(e)}
+            onChange={(e) => handleFileUpload(e)}
           />
         </label>
 

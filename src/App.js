@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import MyNavbar from "./components/MyNavbar";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
@@ -7,14 +7,15 @@ import IsPrivate from "./components/IsPrivate";
 import IsPublic from "./components/IsPublic";
 import ProfilePage from "./pages/ProfilePage";
 import RestaurantsListPage from "./pages/RestaurantsListPage";
-import CreateRestaurant from "./components/CreateRestaurant";
+import CreateRestaurant from "./pages/CreateRestaurant";
 import EditRestaurantPage from "./pages/EditRestaurantPage";
 import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
+/* import { FaHeart } from "react-icons/fa"; */
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <MyNavbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route

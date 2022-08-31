@@ -53,8 +53,7 @@ function ProfilePage() {
     <div>
       {user && (
         <>
-          <h1>Hello, {user.name}!</h1>
-          <img src={user.imageProfile} alt="profile" />
+          <h1>Hello, {user.email}!</h1>
         </>
       )}
 

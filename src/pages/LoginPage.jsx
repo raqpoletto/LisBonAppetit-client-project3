@@ -40,40 +40,24 @@ function LoginPage() {
   return (
     <div>
       <h1>Login</h1>
-      <>
-        <FloatingLabel
-          controlId="floatingInput"
-          label="Email address"
-          className="mb-3"
-        >
-          <Form.Control
-            type="email"
-            name="email"
-            placeholder="name@example.com"
-            value={email}
-            onChange={handleEmail}
-          />
-        </FloatingLabel>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input type="text" name="email" value={email} onChange={handleEmail} />
 
-        <FloatingLabel controlId="floatingPassword" label="Password">
-          <Form.Control
-            type="password"
-            placeholder="Your password"
-            name="password"
-            value={password}
-            onChange={handlePassword}
-          />
-        </FloatingLabel>
-      </>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={handlePassword}
+        />
+        <button type="submit">Login</button>
 
-      <Button variant="danger" type="submit">
-        Login
-      </Button>
+        {errorMessage && <p>{errorMessage}</p>}
 
-      {errorMessage && <p>{errorMessage}</p>}
-
-      <p>Don't have an account?</p>
-      <Link to="/signup">Sign up</Link>
+        <p>Don't have an account?</p>
+        <Link to="/signup">Sign up</Link>
+      </form>
     </div>
   );
 }

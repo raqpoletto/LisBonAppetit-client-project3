@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Searchbar({ searchRestaurant }) {
+function SearchBar({ searchRestaurant }) {
   const [searchString, setSearchString] = useState("");
 
   const handleSearch = (e) => {
@@ -24,4 +24,4 @@ function Searchbar({ searchRestaurant }) {
   );
 }
 
-export default Searchbar;
+export default SearchBar;
