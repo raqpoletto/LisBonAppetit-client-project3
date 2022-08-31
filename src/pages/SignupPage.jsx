@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 /* const API_URL = "http://localhost:5005"; */
 
@@ -34,43 +36,56 @@ function SignupPage(props) {
 
   return (
     <div>
-      <section>
+      <Form>
         <h1>Sign Up</h1>
-
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="username"
-            value={name}
-            onChange={handleName}
-            placeholder="Your name here"
-          />
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label htmlFor="name">Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={name}
+              onChange={handleName}
+              placeholder="Your name here"
+            />
+          </Form.Group>
 
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmail}
-          />
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label htmlFor="email">Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Your email here"
+              value={email}
+              onChange={handleEmail}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePassword}
-          />
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label htmlFor="password">Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={handlePassword}
+            />
+          </Form.Group>
 
-          <button type="submit">Sign up</button>
+          <Button variant="danger" type="submit">
+            Sign up
+          </Button>
         </form>
 
         {errorMessage && <p>{errorMessage}</p>}
-
-        <p>Already have an account?</p>
-        <Link to="/login">Login</Link>
-      </section>
+        <div className="alreadySignup">
+          <p>Already have an account?</p>
+          <Link to="/login">Login</Link>
+        </div>
+      </Form>
     </div>
   );
 }

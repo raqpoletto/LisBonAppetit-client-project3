@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 /* const API_URL = "http://localhost:5005"; */
 
@@ -37,20 +40,35 @@ function LoginPage() {
   return (
     <div>
       <h1>Login</h1>
+      <>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={handleEmail}
+          />
+        </FloatingLabel>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
+        <FloatingLabel controlId="floatingPassword" label="Password">
+          <Form.Control
+            type="password"
+            placeholder="Your password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </FloatingLabel>
+      </>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-        <button type="submit">Login</button>
-      </form>
+      <Button variant="danger" type="submit">
+        Login
+      </Button>
 
       {errorMessage && <p>{errorMessage}</p>}
 

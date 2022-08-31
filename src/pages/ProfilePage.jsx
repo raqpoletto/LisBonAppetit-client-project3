@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import Navbar from "../components/Navbar";
 import axios from "axios";
 
 function ProfilePage() {
