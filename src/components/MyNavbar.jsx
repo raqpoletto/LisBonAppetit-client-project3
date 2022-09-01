@@ -4,69 +4,64 @@ import { AuthContext } from "../context/auth.context";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Button from "react-bootstrap/Button";
 
 function MyNavbar() {
   const { loggedIn, user, logout } = useContext(AuthContext);
 
   return (
-    <Navbar
-      sticky="top"
-      variant="light"
-      bg="light"
-      expand={"sm" | "md" | "lg" | "xl" | "xxl"}
-    >
+    <Navbar bg="transparent">
       <Container fluid>
-        <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <h1>what the fork is for dinner???</h1>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Nav.Link href="/">Home</Nav.Link>
-              {loggedIn && (
-                <>
-                  <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
+        <Navbar.Brand as={Link} to={"/"}>
+          <img
+            src="https://res.cloudinary.com/poletto/image/upload/v1662057879/Restaurants/Captura_de_Tela_2022-09-01_a%CC%80s_18.33.45_yhopnk.png"
+            style={{ marginLeft: "10px" }}
+            width="300px"
+            alt="logo"
+          />
+        </Navbar.Brand>
 
-                  <NavDropdown title="Options" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="/restaurants/create">
-                      Create Restaurant
-                    </NavDropdown.Item>
-
-                    <NavDropdown.Item href="/restaurant/edit/:restaurantId">
-                      Edit Restaurant
-                    </NavDropdown.Item>
-
-                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                    <NavDropdown.Divider />
-
-                    <NavDropdown.Item href="#action/3.4">
-                      <Button variant="danger" onClick={() => logout()}>
-                        Logout
-                      </Button>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                  <span>Hello, {user.email}</span>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
+        <Nav className="justify-content-end">
+          {loggedIn && (
+            <>
+              <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
+              <Nav.Link href="/restaurants/create">
+                Create New Restaurant
+              </Nav.Link>
+              <Nav.Link href="/restaurant/edit/:restaurantId">
+                Edit Restaurant
+              </Nav.Link>
+              <Nav.Link href="/profile">
+                <img
+                  src={user.imageProfile}
+                  alt="..."
+                  width="32"
+                  height="40"
+                  className="rounded-circle"
+                />
+              </Nav.Link>
+              <Nav.Link
+                variant="outline-danger"
+                href="/profile"
+                onClick={() => logout()}
+              >
+                Logout
+              </Nav.Link>
+            </>
+          )}
 
           {!loggedIn && (
-            <div className="col-md-3 text-end">
-              <Link to="/signup">
-                <button>Sign Up</button>
-              </Link>
-              <Link to="/login">
-                <button>Login</button>
-              </Link>
-            </div>
+            <>
+              <Nav.Link as={Link} to={"/signup"}>
+                {" "}
+                Signup{" "}
+              </Nav.Link>
+              <Nav.Link as={Link} to={"/login"}>
+                {" "}
+                Login{" "}
+              </Nav.Link>
+            </>
           )}
-        </div>
+        </Nav>
       </Container>
     </Navbar>
   );
