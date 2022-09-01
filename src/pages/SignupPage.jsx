@@ -30,14 +30,13 @@ function SignupPage(props) {
       })
       .catch((err) => {
         console.log(err);
-        setErrorMessage(err.response.data.message);
+        setErrorMessage(err.response);
       });
   };
 
   return (
     <div>
       <h1>Sign Up</h1>
-
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label htmlFor="name">Name</Form.Label>
