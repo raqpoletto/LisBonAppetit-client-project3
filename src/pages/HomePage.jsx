@@ -53,45 +53,22 @@ function HomePage() {
         <section id="about">
           <div class="about-wrapper container">
             <div class="about-text">
-              <p class="small">About TasKas</p>
-              <h2>We want to make people happy </h2>
+              <h2>Find your hotspot in Lisbon!</h2>
               <p>
-                TasKas helps people discover new places to eat good, tasty and
-                traditional food from Portugal and review them. You can save
-                your favourites to remember the ones you liked the most!
+                We believe that delicious and genuine food doesn't have to be
+                absurdly expensive. This selection is places visited and
+                revisited, selected not only for the attractive price, but also
+                because they are cozy restaurants, with truly good meals and
+                with the Lisbon charm. You can also join and add your favorite
+                places to our list. Have fun and thank you for visiting this
+                little corner of a former chef's mind.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="food-menu">
-          <h2 className="food-menu-heading">
-            Do you want to register your tasca?
-          </h2>
-          <div className="food-menu-container container">
-            <div className="food-menu-item">
-              <div className="food-img">
-                <img
-                  src="https://res.cloudinary.com/dnorytyjz/image/upload/v1654782806/Taskas/Rectangle_45_whgsxn.png"
-                  alt=""
-                />
-              </div>
-              <div className="food-description">
-                <h2 className="food-title">Contact us</h2>
-                <p>
-                  Give us more information about you and your business and we
-                  will contact you as soon as possible.
-                </p>
-                <p className="emailctc">
-                  <u>taskasadmin@gmail.com</u>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <div id="footer">
-          <h2>Taskas &copy; by Marina Palma - Web Dev Ironhack</h2>
+          <h2>LisBon Appétit &copy; by Raquel Poletto </h2>
         </div>
       </main>
     </div>

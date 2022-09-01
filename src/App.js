@@ -1,3 +1,4 @@
+import "./general.css";
 import { Routes, Route } from "react-router-dom";
 import MyNavbar from "./components/MyNavbar";
 import HomePage from "./pages/HomePage";
@@ -10,7 +11,6 @@ import RestaurantsListPage from "./pages/RestaurantsListPage";
 import CreateRestaurant from "./pages/CreateRestaurant";
 import EditRestaurantPage from "./pages/EditRestaurantPage";
 import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
-/* import { FaHeart } from "react-icons/fa"; */
 
 function App() {
   return (
