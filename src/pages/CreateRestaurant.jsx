@@ -9,6 +9,7 @@ function CreateRestaurantPage({ getRestaurantList }) {
   const [averagePrice, setAveragePrice] = useState("");
   const [contact, setContact] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [typeOfFood, setTypeOfFood] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
@@ -18,6 +19,7 @@ function CreateRestaurantPage({ getRestaurantList }) {
   const handleAddress = (e) => setAddress(e.target.value);
   const handleAveragePrice = (e) => setAveragePrice(e.target.value);
   const handleContact = (e) => setContact(e.target.value);
+  const handleTypeOfFood = (e) => setTypeOfFood(e.target.value);
 
   const handleFileUpload = (e) => {
     setLoading(true);
@@ -49,6 +51,7 @@ function CreateRestaurantPage({ getRestaurantList }) {
       address,
       contact,
       averagePrice,
+      typeOfFood,
       imageUrl,
       user: user._id,
     };
@@ -69,6 +72,7 @@ function CreateRestaurantPage({ getRestaurantList }) {
     setAddress("");
     setContact("");
     setAveragePrice("");
+    setTypeOfFood("");
     setImageUrl("");
   };
 
@@ -120,6 +124,17 @@ function CreateRestaurantPage({ getRestaurantList }) {
             value={averagePrice}
             placeholder="€"
             onChange={handleAveragePrice}
+          />
+        </label>
+
+        <label htmlFor="typeOfFood">
+          Type of Food:
+          <input
+            type="text"
+            name="typeOfFood"
+            value={typeOfFood}
+            placeholder="Italian, French, etc."
+            onChange={handleTypeOfFood}
           />
         </label>
 

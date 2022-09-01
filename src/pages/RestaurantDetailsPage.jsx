@@ -2,15 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Favourites from "../components/Favourites";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 function RestaurantDetailsPage() {
   const [restaurant, setRestaurant] = useState(null);
   const { restaurantId } = useParams();
   const { user } = useContext(AuthContext);
+  const getToken = localStorage.getItem("authToken");
 
   const getRestaurant = async () => {
     try {
-      const getToken = localStorage.getItem("authToken");
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/restaurant/${restaurantId}`,
         {
@@ -26,53 +29,60 @@ function RestaurantDetailsPage() {
     }
   };
 
+  const handleFavourites = async (userId, restaurantId) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/api/favourites`,
+        { userId, restaurantId },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getRestaurant();
   }, []);
 
   return (
     <div>
-      <h1>teste</h1>
-      {restaurant && (
-        <>
-          <img src={restaurant.imageUrl} />
-          <h1>{restaurant.name}</h1>
-          <p>{restaurant.description}</p>
-          <h3>{restaurant.address}</h3>
-          <h3>{restaurant.contact}</h3>
-          <h3>Average price: {restaurant.averagePrice} €</h3>
-        </>
+      {user && user.role === "user" && (
+        <Favourites restaurantId={restaurantId} />
       )}
+      {restaurant && (
+        <div key={restaurant._id}>
+          <Card style={{ width: "18rem" }}>
+            <Card.Img variant="top" src={restaurant.imageUrl} />
+            <Card.Body>
+              <Card.Title>{restaurant.name}</Card.Title>
+              <Card.Text>{restaurant.description}</Card.Text>
+              <Card.Text>{restaurant.address}</Card.Text>
+              <Card.Text>{restaurant.contact}</Card.Text>
+              <Card.Text>{restaurant.averagePrice}</Card.Text>
+              <Button variant="danger">
+                <Link to={`/restaurant/edit/${restaurantId}`}>Edit</Link>
+              </Button>
 
-      <Link to={`/restaurant/edit/${restaurantId}`}>
-        <button>Edit Restaurant</button>
-      </Link>
+              <Link to="/restaurants">
+                <button>See all Restaurants</button>
+              </Link>
 
-      <Link to="/restaurants">
-        <button>See all Restaurants</button>
-      </Link>
+              <Button
+                variant="danger"
+                onClick={() => handleFavourites(user._id, restaurant._id)}
+              >
+                Favourites:
+              </Button>
+            </Card.Body>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
 export default RestaurantDetailsPage;
-
-/* return (
-    <div className="RestaurantDetails">
-        {restaurant && (
-        <>
-        <img src={restaurant.imageUrl} />
-        <h2>{restaurant.name}</h2>
-        <p>{restaurant.description}</p>
-        <h3>{restaurant.address}</h3>
-        <h3>{restaurant.contact}</h3> 
-        <h3>Average price: {restaurant.averagePrice} €</h3>         
-                    </>
-                    )}
-      </div>
-
-      <Link to="/restaurants">
-        <Button>See all Restaurants</Button>
-      </Link>
-    </div>
-  );
-} */

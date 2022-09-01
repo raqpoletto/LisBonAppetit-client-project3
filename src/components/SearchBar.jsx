@@ -8,15 +8,29 @@ function SearchBar({ searchRestaurant }) {
     searchRestaurant(e.target.value);
   };
 
+  const searchRestaurants = (search) => {
+    let filteredRestaurants = restaurants.filter((restaurant) => {
+      const filteredName = restaurant.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const filteredTypeofFood = restaurant.typeOfFood
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      return filteredName || filteredTypeofFood;
+    });
+    setAllRestaurants(filteredRestaurants);
+    console.log(restaurants);
+  };
+
   return (
     <div>
       <label for="search">
-        <Searchbar /> Search
+        <SearchBar /> Search
       </label>
       <input
         id="search"
         value={searchString}
-        placeholder="Restaurant name"
+        placeholder="Restaurant name or type of food"
         type="text"
         onChange={handleSearch}
       />

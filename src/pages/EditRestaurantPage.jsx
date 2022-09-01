@@ -10,6 +10,7 @@ function EditRestaurantPage() {
   const [averagePrice, setAveragePrice] = useState("");
   const [contact, setContact] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [typeOfFood, setTypeOfFood] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
@@ -21,6 +22,7 @@ function EditRestaurantPage() {
   const handleAddress = (e) => setAddress(e.target.value);
   const handleAveragePrice = (e) => setAveragePrice(e.target.value);
   const handleContact = (e) => setContact(e.target.value);
+  const handleTypeOfFood = (e) => setTypeOfFood(e.target.value);
 
   const handleFileUpload = (e) => {
     setLoading(true);
@@ -59,6 +61,7 @@ function EditRestaurantPage() {
       setContact(response.data.contact);
       setAveragePrice(response.data.averagePrice);
       setImageUrl(response.data.imageUrl);
+      setTypeOfFood(response.data.typeOfFood);
     } catch (err) {
       console.log(err);
     }
@@ -79,6 +82,7 @@ function EditRestaurantPage() {
       averagePrice,
       contact,
       imageUrl,
+      typeOfFood,
       user: user._id,
     };
 
@@ -99,6 +103,7 @@ function EditRestaurantPage() {
     setContact("");
     setAveragePrice("");
     setImageUrl("");
+    setTypeOfFood("");
     navigate(`/restaurants/${restaurantId}`);
   };
   const deleteRestaurant = () => {
@@ -162,6 +167,17 @@ function EditRestaurantPage() {
             value={averagePrice}
             placeholder="€"
             onChange={handleAveragePrice}
+          />
+        </label>
+
+        <label htmlFor="typeOfFood">
+          Type of Food:
+          <input
+            type="text"
+            name="typeOfFood"
+            value={typeOfFood}
+            placeholder="Italian, French, etc."
+            onChange={handleTypeOfFood}
           />
         </label>
 

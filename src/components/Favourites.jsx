@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 function Favourites() {
   const { user } = useContext(AuthContext);
@@ -17,9 +18,9 @@ function Favourites() {
           },
         }
       );
-      const myFavourites = response.data.favourites;
+      const userFavourites = response.data.favourites;
 
-      if (favourites.some((item) => item._id === restaurantId)) {
+      if (userFavourites.some((item) => item._id === restaurantId)) {
         setIsFavourite(true);
       }
     } catch (err) {
@@ -52,10 +53,10 @@ function Favourites() {
     getFavourite();
   }, [isFavourite]);
 
-  eturn(
+  return (
     <div>
       <button className="favourite-btn" onClick={handleClick}>
-        {isFavourite ? <AiFillHeart /> : <AiOutlineHeart />}
+        {isFavourite ? <FaHeart /> : <FaRegHeart />}
       </button>
     </div>
   );
