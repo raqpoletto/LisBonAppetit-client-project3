@@ -2,14 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
-import SearchBar from "../components/SearchBar";
+import { FaHeart } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function RestaurantsListPage() {
   const [restaurants, setRestaurants] = useState([]);
+  /*   const [allRestaurants, setAllRestaurants] = useState([]);
+  const [displayRestaurants, setDisplayRestaurants] = useState([]); */
   const getToken = localStorage.getItem("authToken");
-  const [allRestaurants, setAllRestaurants] = useState([]);
   const { user } = useContext(AuthContext);
 
   const getRestaurantList = async () => {
@@ -40,11 +41,22 @@ function RestaurantsListPage() {
           },
         }
       );
-      console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
+
+  /* const searchRestaurants = (search) => {
+    let filteredRestaurants = restaurants.filter((restaurant) => {
+      const filteredName = restaurant.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      return filteredName;
+      return fiteredfilteredTypeOfCuisine; */
+  /*    });
+    setAllRestaurants(filteredRestaurants);
+    console.log(restaurants);
+  }; */
 
   useEffect(() => {
     getRestaurantList();
@@ -52,7 +64,6 @@ function RestaurantsListPage() {
 
   return (
     <div>
-      {/* <SearchBar searchRestaurants={searchRestaurants} /> */}
       {restaurants &&
         restaurants.map((restaurant) => {
           return (

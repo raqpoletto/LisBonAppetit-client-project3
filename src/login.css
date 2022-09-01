@@ -1,0 +1,80 @@
+.loginform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 5px solid #068a9c;
+  border-style: groove;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: left;
+  margin-top: 20px;
+}
+.loginformbtm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#contact {
+  padding-top: -3rem;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  align-items: center;
+  width: 80vw;
+}
+
+.contact-img {
+  width: 100vw;
+}
+
+.contact-img img {
+  display: block;
+  height: 350px;
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.form-container {
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+.form-container input {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding: 1rem 0;
+  box-shadow: none;
+  outline: none;
+  margin-bottom: 1rem;
+  color: #444;
+  font-weight: 500;
+}
+
+.form-container h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 1rem;
+  margin-top: -1.2rem;
+}
+
+.form-container a {
+  font-size: 1.3rem;
+}

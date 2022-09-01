@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import Favourites from "../components/Favourites";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
@@ -29,7 +28,7 @@ function RestaurantDetailsPage() {
     }
   };
 
-  const handleFavourites = async (userId, restaurantId) => {
+  /*  const handleFavourites = async (userId, restaurantId) => {
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/api/favourites`,
@@ -43,7 +42,7 @@ function RestaurantDetailsPage() {
     } catch (err) {
       console.log(err);
     }
-  };
+  }; */
 
   useEffect(() => {
     getRestaurant();
@@ -51,9 +50,6 @@ function RestaurantDetailsPage() {
 
   return (
     <div>
-      {user && user.role === "user" && (
-        <Favourites restaurantId={restaurantId} />
-      )}
       {restaurant && (
         <div key={restaurant._id}>
           <Card style={{ width: "18rem" }}>
@@ -63,6 +59,7 @@ function RestaurantDetailsPage() {
               <Card.Text>{restaurant.description}</Card.Text>
               <Card.Text>{restaurant.address}</Card.Text>
               <Card.Text>{restaurant.contact}</Card.Text>
+              <Card.Text>{restaurant.typeOfFood}</Card.Text>
               <Card.Text>{restaurant.averagePrice}</Card.Text>
               <Button variant="danger">
                 <Link to={`/restaurant/edit/${restaurantId}`}>Edit</Link>
@@ -71,13 +68,6 @@ function RestaurantDetailsPage() {
               <Link to="/restaurants">
                 <button>See all Restaurants</button>
               </Link>
-
-              <Button
-                variant="danger"
-                onClick={() => handleFavourites(user._id, restaurant._id)}
-              >
-                Favourites:
-              </Button>
             </Card.Body>
           </Card>
         </div>
