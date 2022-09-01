@@ -36,49 +36,48 @@ function SignupPage(props) {
 
   return (
     <div>
-      <Form>
-        <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label htmlFor="name">Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              value={name}
-              onChange={handleName}
-              placeholder="Your name here"
-            />
-          </Form.Group>
+      <h1>Sign Up</h1>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label htmlFor="email">Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Your email here"
-              value={email}
-              onChange={handleEmail}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label htmlFor="name">Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+            value={name}
+            onChange={handleName}
+            placeholder="Your name here"
+          />
+        </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label htmlFor="password">Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePassword}
-            />
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Your email here"
+            value={email}
+            onChange={handleEmail}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-          <Button variant="danger" type="submit">
-            Sign up
-          </Button>
-        </form>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </Form.Group>
+
+        <Button variant="danger" type="submit">
+          Sign up
+        </Button>
 
         {errorMessage && <p>{errorMessage}</p>}
         <div className="alreadySignup">
