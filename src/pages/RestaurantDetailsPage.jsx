@@ -72,12 +72,16 @@ function RestaurantDetailsPage() {
                     <Card.Text>{restaurant.contact}</Card.Text>
                     <Card.Text>{restaurant.typeOfFood}</Card.Text>
                     <Card.Text>{restaurant.averagePrice}</Card.Text>
-                    <Button variant="danger">
-                      <Link to={`/restaurant/edit/${restaurantId}`}>Edit</Link>
+                    <Button variant="outline-danger">
+                      <Link to={`/restaurant/edit/${restaurantId}`}>
+                        Edit Restaurant
+                      </Link>
                     </Button>
 
                     <Link to="/restaurants">
-                      <button>See all Restaurants</button>
+                      <Button variant="outline-danger">
+                        Back to Restaurants
+                      </Button>
                     </Link>
                   </Card.Body>
                 </Col>

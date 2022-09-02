@@ -65,6 +65,7 @@ function EditRestaurantPage() {
       setAddress(response.data.address);
       setContact(response.data.contact);
       setAveragePrice(response.data.averagePrice);
+      setTypeOfFood(response.data.typeOfFood);
       setImageUrl(response.data.imageUrl);
     } catch (err) {
       console.log(err);
@@ -85,6 +86,7 @@ function EditRestaurantPage() {
       address,
       averagePrice,
       contact,
+      typeOfFood,
       imageUrl,
       user: user._id,
     };
@@ -105,6 +107,7 @@ function EditRestaurantPage() {
     setAddress("");
     setContact("");
     setAveragePrice("");
+    setTypeOfFood("");
     setImageUrl("");
     navigate(`/restaurants/${restaurantId}`);
   };
