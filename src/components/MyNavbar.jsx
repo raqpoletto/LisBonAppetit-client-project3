@@ -50,16 +50,14 @@ function MyNavbar() {
           )}
 
           {!loggedIn && (
-            <>
-              <Nav.Link as={Link} to={"/signup"}>
-                {" "}
-                Signup{" "}
-              </Nav.Link>
-              <Nav.Link as={Link} to={"/login"}>
-                {" "}
-                Login{" "}
-              </Nav.Link>
-            </>
+            <div className="col-md-3 text-end">
+              <Link to="/signup">
+                <button>Sign Up</button>
+              </Link>
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+            </div>
           )}
         </Nav>
       </Container>
