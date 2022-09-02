@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function RestaurantsListPage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -63,32 +64,65 @@ function RestaurantsListPage() {
   }, []);
 
   return (
-    <div>
-      {restaurants &&
-        restaurants.map((restaurant) => {
-          return (
-            <div key={restaurant._id}>
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={restaurant.imageUrl} />
-                <Card.Body>
-                  <Card.Title>{restaurant.name}</Card.Title>
-                  <Card.Text>{restaurant.description}</Card.Text>
-                  <Button variant="danger">
-                    <Link to={`/restaurants/${restaurant._id}`}>
-                      {restaurant.name}
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleFavourites(user._id, restaurant._id)}
-                  >
-                    Favourites:
-                  </Button>
-                </Card.Body>
-              </Card>
-            </div>
-          );
-        })}
+    <div className="allRestForm">
+      <Row xs={2} md={3} className="g-4">
+        {restaurants &&
+          restaurants.map((restaurant) => {
+            return (
+              <Col>
+                <Card
+                  style={{ maxWidth: "95%" }}
+                  key={restaurant._id}
+                  className="shadow p-2 mb-1 bg-white rounded card h-100"
+                >
+                  <div className="imageSize">
+                    <Card.Img
+                      variant="top"
+                      src={restaurant.imageUrl}
+                      alt="restaurant"
+                      className="photosize"
+                    />
+                  </div>
+                  <Card.Body className="body-rest">
+                    <Card.Title className="small">{restaurant.name}</Card.Title>
+
+                    <div className="btns-admin">
+                      <Link to={`/restaurants/${restaurant._id}`}>
+                        <Button
+                          style={{
+                            fontSize: "0.8rem",
+                            padding: "5px",
+                            backgroundColor: "#068a9c",
+                          }}
+                          type="submit"
+                          className="btn-admin remove-brd"
+                        >
+                          Details
+                        </Button>
+                      </Link>
+
+                      <Link to={`/restaurants/edit/${restaurant._id}`}>
+                        <Button
+                          className="remove-brd"
+                          style={{
+                            fontSize: "0.8rem",
+                            padding: "5px",
+                            marginLeft: "2px",
+                            backgroundColor: "#d44a1e",
+                            width: "2.4rem",
+                          }}
+                          type="submit"
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+      </Row>
     </div>
   );
 }

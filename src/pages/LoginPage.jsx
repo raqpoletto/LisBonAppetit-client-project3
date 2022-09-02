@@ -4,7 +4,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 /* const API_URL = "http://localhost:5005"; */
 
@@ -40,24 +39,46 @@ function LoginPage() {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label htmlFor="name">Name</Form.Label>
+        </Form.Group>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-        <button type="submit">Login</button>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Your email here"
+            value={email}
+            onChange={handleEmail}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </Form.Group>
+
+        <Button variant="danger" type="submit">
+          Login
+        </Button>
 
         {errorMessage && <p>{errorMessage}</p>}
-
-        <p>Don't have an account?</p>
-        <Link to="/signup">Sign up</Link>
-      </form>
+        <div className="alreadySignup">
+          <p>Don't have an account?</p>
+          <Link to="/signup">Sign up</Link>
+        </div>
+      </Form>
     </div>
   );
 }
