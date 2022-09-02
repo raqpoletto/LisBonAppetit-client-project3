@@ -4,7 +4,6 @@ import { AuthContext } from "../context/auth.context";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
 
 function MyNavbar() {
   const { loggedIn, user, logout } = useContext(AuthContext);
@@ -51,13 +50,9 @@ function MyNavbar() {
           )}
 
           {!loggedIn && (
-            <div className="col-md-3 text-end">
-              <Link to="/signup">
-                <Button variant="outline-danger">Sign Up</Button>
-              </Link>
-              <Link to="/login">
-                <Button variant="outline-danger">Login</Button>
-              </Link>
+            <div>
+              <Link to="/signup">Signup</Link>
+              <Link to="/login">Login</Link>
             </div>
           )}
         </Nav>
