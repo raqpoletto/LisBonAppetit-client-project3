@@ -4,7 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 function HomePage() {
   return (
     <div>
-      <div className="main-create-rest home-carrousel">
+      {/* <div className="main-create-rest home-carrousel">
         <Carousel className="carrosel-ph">
           <Carousel.Item interval={4000}>
             <img
@@ -48,7 +48,7 @@ function HomePage() {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-      </div>
+      </div> */}
       <main>
         <section id="about">
           <div class="about-wrapper container">
