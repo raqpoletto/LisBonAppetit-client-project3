@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
 
 function CreateRestaurantPage({ getRestaurantList }) {
   const [name, setName] = useState("");
@@ -15,8 +13,6 @@ function CreateRestaurantPage({ getRestaurantList }) {
   const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
-
-  const navigate = useNavigate();
 
   const handleName = (e) => setName(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
@@ -68,7 +64,8 @@ function CreateRestaurantPage({ getRestaurantList }) {
       })
       .then(() => {
         getRestaurantList();
-      });
+      })
+      .catch((err) => console.log(err));
 
     setName("");
     setDescription("");
@@ -77,105 +74,82 @@ function CreateRestaurantPage({ getRestaurantList }) {
     setAveragePrice("");
     setTypeOfFood("");
     setImageUrl("");
-    navigate("/restaurants");
   };
 
   return (
-    <main>
-      <h3 className="main-create-rest">Create a New Restaurant</h3>
-      <div className="main-create-rest">
-        <Form onSubmit={handleSubmit} className="create-rest">
-          <Row className="mb-1">
-            <Form.Group as={Col} controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={handleName}
-                value={name}
-                required
-                placeholder="Enter name"
-              />
-            </Form.Group>
+    <div>
+      <h3>Create a New Restaurant</h3>
 
-            <Form.Group as={Col} controlId="contact">
-              <Form.Label>Contact</Form.Label>
-              <Form.Control
-                type="text"
-                name="contact"
-                value={contact}
-                placeholder="Enter number"
-                onChange={handleContact}
-              />
-            </Form.Group>
-          </Row>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          Name:
+          <input type="text" name="name" value={name} onChange={handleName} />
+        </label>
 
-          <Form.Group className="mb-1" controlId="address">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              name="address"
-              onChange={handleAddress}
-              value={address}
-              placeholder="123 Street "
-            />
-          </Form.Group>
+        <label htmlFor="description">
+          Description:
+          <input
+            type="text"
+            name="description"
+            value={description}
+            onChange={handleDescription}
+          />
+        </label>
 
-          <Row className="mb-1">
-            <Form.Group as={Col} controlId="formGridZip">
-              <Form.Label>Average Price</Form.Label>
-              <Form.Control
-                onChange={handleAveragePrice}
-                value={averagePrice}
-                type="number"
-                name="averagePrice"
-                placeholder="€"
-              />
-            </Form.Group>
+        <label htmlFor="address">
+          Address:
+          <input
+            type="text"
+            name="address"
+            value={address}
+            onChange={handleAddress}
+          />
+        </label>
 
-            <Form.Group as={Col} controlId="typeOfFood">
-              <Form.Label>Type of Food</Form.Label>
-              <Form.Control
-                onChange={handleTypeOfFood}
-                value={typeOfFood}
-                type="text"
-                name="typeOfFood"
-                placeholder="French, Portuguese, Chinese, etc"
-              />
-            </Form.Group>
-          </Row>
+        <label htmlFor="contact">
+          Contact:
+          <input
+            type="text"
+            name="contact"
+            value={contact}
+            onChange={handleContact}
+          />
+        </label>
 
-          <Form.Group
-            as={Col}
-            className="mb-1"
-            controlId="exampleForm.ControlTextarea1"
-          >
-            <Form.Label>Description</Form.Label>
-            <Form.Control onChange={handleDescription} as="textarea" rows={2} />
-          </Form.Group>
+        <label htmlFor="averagePrice">
+          Average Price:
+          <input
+            type="number"
+            name="averagePrice"
+            value={averagePrice}
+            placeholder="€"
+            onChange={handleAveragePrice}
+          />
+        </label>
 
-          <Form.Group controlId="formFileSm" className="mb-3">
-            <Form.Label>Add photo </Form.Label>
-            <Form.Control
-              type="file"
-              size="sm"
-              required
-              onChange={(e) => handleFileUpload(e)}
-            />
-          </Form.Group>
+        <label htmlFor="typeOfFood">
+          Type of Food:
+          <input
+            type="text"
+            name="typeOfFood"
+            value={typeOfFood}
+            placeholder="Italian, French, etc."
+            onChange={handleTypeOfFood}
+          />
+        </label>
 
-          <Button
-            className="remove-brd"
-            style={{ backgroundColor: "#b54141" }}
-            type="submit"
-          >
-            {loading ? (
-              <Spinner animation="border" variant="light" size="sm" />
-            ) : (
-              "Add"
-            )}
-          </Button>
-        </Form>
-      </div>
-    </main>
+        <label htmlFor="image">
+          Image:
+          <input
+            type="file"
+            accept=".jpg, .png, .jpeg"
+            onChange={(e) => handleFileUpload(e)}
+          />
+        </label>
+
+        <button type="submit">Create Restaurant</button>
+      </form>
+    </div>
   );
 }
 

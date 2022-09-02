@@ -1,14 +1,7 @@
 .allRestForm {
   margin-top: 30px;
 }
-.searchBar {
-  margin-bottom: 30px;
-}
-.search-input {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-}
+
 .body-rest {
   display: flex;
   flex-direction: column;
