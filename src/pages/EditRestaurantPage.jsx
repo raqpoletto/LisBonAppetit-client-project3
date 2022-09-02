@@ -2,6 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Spinner } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function EditRestaurantPage() {
   const [name, setName] = useState("");
@@ -10,6 +15,7 @@ function EditRestaurantPage() {
   const [averagePrice, setAveragePrice] = useState("");
   const [contact, setContact] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [typeOfFood, setTypeOfFood] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
@@ -21,6 +27,7 @@ function EditRestaurantPage() {
   const handleAddress = (e) => setAddress(e.target.value);
   const handleAveragePrice = (e) => setAveragePrice(e.target.value);
   const handleContact = (e) => setContact(e.target.value);
+  const handleTypeOfFood = (e) => setTypeOfFood(e.target.value);
 
   const handleFileUpload = (e) => {
     setLoading(true);
@@ -115,77 +122,109 @@ function EditRestaurantPage() {
   };
 
   return (
-    <div>
-      <h3>Edit Restaurant</h3>
+    <main>
+      <h3 className="main-create-rest">Edit Restaurant</h3>
+      <div className="main-create-rest">
+        <Form onSubmit={handleSubmit} className="create-rest">
+          <Row className="mb-1">
+            <Form.Group as={Col} controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={handleName}
+                value={name}
+                required
+                placeholder="Enter name"
+              />
+            </Form.Group>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Name:
-          <input type="text" name="name" value={name} onChange={handleName} />
-        </label>
+            <Form.Group as={Col} controlId="contact">
+              <Form.Label>Contact</Form.Label>
+              <Form.Control
+                type="text"
+                name="contact"
+                value={contact}
+                placeholder="Enter number"
+                onChange={handleContact}
+              />
+            </Form.Group>
+          </Row>
 
-        <label htmlFor="description">
-          Description:
-          <textarea
-            name="description"
-            type="text"
-            value={description}
-            cols="30"
-            rows="10"
-            onChange={handleDescription}
-          ></textarea>
-        </label>
+          <Form.Group className="mb-1" controlId="address">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              name="address"
+              onChange={handleAddress}
+              value={address}
+              placeholder="123 Street "
+            />
+          </Form.Group>
 
-        <label htmlFor="address">
-          Address:
-          <input
-            type="text"
-            name="address"
-            value={address}
-            onChange={handleAddress}
-          />
-        </label>
+          <Row className="mb-1">
+            <Form.Group as={Col} controlId="formGridZip">
+              <Form.Label>Average Price</Form.Label>
+              <Form.Control
+                onChange={handleAveragePrice}
+                value={averagePrice}
+                type="number"
+                name="averagePrice"
+                placeholder="€"
+              />
+            </Form.Group>
 
-        <label htmlFor="contact">
-          Contact:
-          <input
-            type="text"
-            name="contact"
-            value={contact}
-            onChange={handleContact}
-          />
-        </label>
+            <Form.Group as={Col} controlId="typeOfFood">
+              <Form.Label>Type of Food</Form.Label>
+              <Form.Control
+                onChange={handleTypeOfFood}
+                value={typeOfFood}
+                type="text"
+                name="typeOfFood"
+                placeholder="French, Portuguese, Chinese, etc"
+              />
+            </Form.Group>
+          </Row>
 
-        <label htmlFor="averagePrice">
-          Average Price:
-          <input
-            type="number"
-            name="averagePrice"
-            value={averagePrice}
-            placeholder="€"
-            onChange={handleAveragePrice}
-          />
-        </label>
+          <Form.Group
+            as={Col}
+            className="mb-1"
+            controlId="exampleForm.ControlTextarea1"
+          >
+            <Form.Label>Description</Form.Label>
+            <Form.Control onChange={handleDescription} as="textarea" rows={2} />
+          </Form.Group>
 
-        <label htmlFor="image">
-          Image:
-          <input
-            type="file"
-            accept=".jpg, .png, .jpeg"
-            onChange={(e) => handleFileUpload(e)}
-          />
-        </label>
+          <Form.Group controlId="formFileSm" className="mb-3">
+            <Form.Label>Add photo </Form.Label>
+            <Form.Control
+              type="file"
+              size="sm"
+              required
+              onChange={(e) => handleFileUpload(e)}
+            />
+          </Form.Group>
 
-        <button
-          className="btn btn-outline-primary me-2"
-          onClick={EditRestaurantPage}
-        >
-          Edit Restaurant
-        </button>
+          <Button
+            className="remove-brd"
+            style={{ backgroundColor: "#b54141" }}
+            type="submit"
+          >
+            {loading ? (
+              <Spinner animation="border" variant="light" size="sm" />
+            ) : (
+              "Update Restaurant"
+            )}
+          </Button>
 
-        <button onClick={deleteRestaurant}>Delete Restaurant</button>
-      </form>
-    </div>
+          <Button
+            className="remove-brd"
+            style={{ backgroundColor: "#b54141" }}
+            type="submit"
+          >
+            Delete Restaurant
+          </Button>
+        </Form>
+      </div>
+    </main>
   );
 }
 export default EditRestaurantPage;

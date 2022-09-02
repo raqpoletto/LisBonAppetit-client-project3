@@ -92,7 +92,7 @@ function RestaurantsListPage() {
                           style={{
                             fontSize: "0.8rem",
                             padding: "5px",
-                            backgroundColor: "#068a9c",
+                            backgroundColor: "#b54141",
                           }}
                           type="submit"
                           className="btn-admin remove-brd"
@@ -108,7 +108,7 @@ function RestaurantsListPage() {
                             fontSize: "0.8rem",
                             padding: "5px",
                             marginLeft: "2px",
-                            backgroundColor: "#d44a1e",
+                            backgroundColor: "#b54141",
                             width: "2.4rem",
                           }}
                           type="submit"

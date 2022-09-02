@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function RestaurantDetailsPage() {
   const [restaurant, setRestaurant] = useState(null);
@@ -50,28 +52,40 @@ function RestaurantDetailsPage() {
 
   return (
     <div>
-      {restaurant && (
-        <div key={restaurant._id}>
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={restaurant.imageUrl} />
-            <Card.Body>
-              <Card.Title>{restaurant.name}</Card.Title>
-              <Card.Text>{restaurant.description}</Card.Text>
-              <Card.Text>{restaurant.address}</Card.Text>
-              <Card.Text>{restaurant.contact}</Card.Text>
-              <Card.Text>{restaurant.typeOfFood}</Card.Text>
-              <Card.Text>{restaurant.averagePrice}</Card.Text>
-              <Button variant="danger">
-                <Link to={`/restaurant/edit/${restaurantId}`}>Edit</Link>
-              </Button>
+      <h1 className="title">Restaurant details</h1>
+      <div className="detailsCard">
+        <Card
+          style={{ maxWidth: "90%" }}
+          className="shadow p-2 mt-2 mb-1 bg-white rounded card h-100"
+        >
+          <Row className="g-0">
+            {restaurant && (
+              <>
+                <Col md="4">
+                  <Card.Img src={restaurant.imageUrl} alt="..." fluid />
+                </Col>
+                <Col md="8">
+                  <Card.Body className="body-details-card">
+                    <Card.Title>{restaurant.name}</Card.Title>
+                    <Card.Text>{restaurant.description}</Card.Text>
+                    <Card.Text>{restaurant.address}</Card.Text>
+                    <Card.Text>{restaurant.contact}</Card.Text>
+                    <Card.Text>{restaurant.typeOfFood}</Card.Text>
+                    <Card.Text>{restaurant.averagePrice}</Card.Text>
+                    <Button variant="danger">
+                      <Link to={`/restaurant/edit/${restaurantId}`}>Edit</Link>
+                    </Button>
 
-              <Link to="/restaurants">
-                <button>See all Restaurants</button>
-              </Link>
-            </Card.Body>
-          </Card>
-        </div>
-      )}
+                    <Link to="/restaurants">
+                      <button>See all Restaurants</button>
+                    </Link>
+                  </Card.Body>
+                </Col>
+              </>
+            )}
+          </Row>
+        </Card>
+      </div>
     </div>
   );
 }
