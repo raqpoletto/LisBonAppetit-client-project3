@@ -6,7 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsPublic from "./components/IsPublic";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 import RestaurantsListPage from "./pages/RestaurantsListPage";
 import CreateRestaurant from "./pages/CreateRestaurant";
 import EditRestaurantPage from "./pages/EditRestaurantPage";

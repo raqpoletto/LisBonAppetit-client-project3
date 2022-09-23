@@ -34,7 +34,10 @@ function MyNavbar() {
                 <Nav.Link href="/restaurant/edit/:restaurantId">
                   Update Restaurant
                 </Nav.Link>
-                <NavDropdown title={"Hello, Raquel"} id="basic-nav-dropdown">
+                <NavDropdown
+                  title={`Hello, ${user.name}`}
+                  id="basic-nav-dropdown"
+                >
                   <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
 
                   <NavDropdown.Divider />
